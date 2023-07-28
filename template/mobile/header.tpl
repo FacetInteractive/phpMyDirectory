@@ -11,7 +11,7 @@
     <link rel="apple-touch-icon" sizes="144x144" href="<?php echo $this->urlCDN('images/icon_ipad_retina.png'); ?>" />
     <link rel="apple-touch-icon" sizes="114x114" href="<?php echo $this->urlCDN('images/icon_iphone_retina.png'); ?>" />
     <link rel="apple-touch-startup-image" href="<?php echo $this->urlCDN('images/startup.png'); ?>">
-    <?php echo $javascript; ?>
+    <?php echo isset($javascript) ? $javascript : ""; ?>
     <script type="text/javascript">
     $(document).bind("mobileinit", function() {
         $.mobile.defaultPageTransition = 'fade';

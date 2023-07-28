@@ -1,11 +1,11 @@
-<?php if($install_instructions == '') { ?>
+<?php if(empty($install_instructions)) { ?>
 <script type="text/javascript">
     $(document).ready(function(){
         $('#database_help').popover({'html': true, container: 'body', trigger: 'hover', placement: 'right', title: 'Database Help', content: 'You must create a database before running this installation process. The details for the database you create are entered in this step. The host name is often &quot;localhost&quot; if not otherwise stated by your web host.&nbsp; The table prefix setting adds a prefix to all database tables. (ex: pmd_users)'});
         $('#admin_help').popover({'html': true, container: 'body', trigger: 'hover', placement: 'right', title: 'Administrator Login Help', content: 'The email and password entered here will allow access to the directory administrative area.'});
     });
 </script>
-<?php if(count($results)) { ?>
+<?php if(isset($results)) { ?>
     <div class="alert alert-danger text-center">
         <h4>Server Requirements Error</h4>
         <h5><?php echo $results[0]['result']; ?></h5>
@@ -22,11 +22,11 @@
         <div class="col-xs-12">
         <fieldset>
             <legend>Administrator Login Details <i id="admin_help" class="glyphicon glyphicon-question-sign text-muted"></i></legend>
-            <?php if($errors['admin_details'] != '') { ?>
+            <?php if(isset($errors['admin_details']) && $errors['admin_details'] != '') { ?>
                 <div class="alert alert-danger">
                     <?php echo $errors['admin_details']; ?>
                 </div>
-            <?php } elseif($errors['password_mismatch'] != '') { ?>
+            <?php } elseif(isset($errors['password_mismatch']) && $errors['password_mismatch'] != '') { ?>
                 <div class="alert alert-danger">
                     <?php echo $errors['password_mismatch']; ?>
                 </div>
@@ -34,19 +34,19 @@
             <div class="form-group">
                 <label class="col-lg-10 control-label">Email:</label>
                 <div class="col-lg-14">
-                    <input class="form-control" type="text" id="admin_email" name="admin_email" size="31" value="<?php echo htmlspecialchars($_POST['admin_email']); ?>">
+                    <input class="form-control" type="text" id="admin_email" name="admin_email" size="31" value="<?php echo !empty($_POST['admin_email']) ? htmlspecialchars($_POST['admin_email']) : ""; ?>">
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-lg-10 control-label">Password:</label>
                 <div class="col-lg-14">
-                    <input class="form-control" type="text" name="admin_pass" size="20" value="<?php echo htmlspecialchars($_POST['admin_pass']); ?>">
+                    <input class="form-control" type="text" name="admin_pass" size="20" value="<?php echo !empty($_POST['admin_pass']) ? htmlspecialchars($_POST['admin_pass']) : ""; ?>">
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-lg-10 control-label">Password Repeat:</label>
                 <div class="col-lg-14">
-                    <input class="form-control" type="text" name="admin_pass2" size="20" value="<?php echo htmlspecialchars($_POST['admin_pass2']); ?>">
+                    <input class="form-control" type="text" name="admin_pass2" size="20" value="<?php echo  !empty($_POST['admin_pass2']) ? htmlspecialchars($_POST['admin_pass2']) : ""; ?>">
                 </div>
             </div>
         </fieldset>
@@ -54,48 +54,52 @@
         <div class="col-xs-11 col-xs-offset-1">
         <fieldset>
             <legend>Database Connection Details <i id="database_help" class="glyphicon glyphicon-question-sign text-muted"></i></legend>
-            <?php if($errors['database_connect'] != '') { ?>
+            <?php if(isset($errors['database_connect']) && $errors['database_connect'] != '') { ?>
                 <div class="alert alert-danger">
                     <?php echo $errors['database_connect']; ?>
                 </div>
-            <?php } elseif($errors['prefix_exists'] != '') { ?>
+            <?php } elseif(isset($errors['prefix_exists']) && $errors['prefix_exists'] != '') { ?>
                 <div class="alert alert-danger">
                     <?php echo $errors['prefix_exists']; ?>
                     <label><input type="checkbox" name="prefix_overwrite" value="YES" <?php if(isset($_POST['prefix_overwrite'])) echo 'CHECKED'; ?>> Overwrite tables</label>
                 </div>
-            <?php } elseif($errors['prefix_format'] != '') { ?>
+            <?php } elseif(isset($errors['prefix_exists']) && $errors['prefix_format'] != '') { ?>
                 <div class="alert alert-danger">
                     <?php echo $errors['prefix_format']; ?>
+                </div>
+            <?php } elseif(isset($errors['terms'])) { ?>
+                <div class="alert alert-danger">
+                    <?php echo $errors['terms']; ?>
                 </div>
             <?php } ?>
             <div class="form-group">
                 <label class="col-lg-10 control-label">Database Host Name:</label>
                 <div class="col-lg-14">
-                    <input class="form-control" type="text" name="hostname" value="<?php echo htmlspecialchars(($_POST['hostname'] == '') ? 'localhost' : $_POST['hostname']); ?>">
+                    <input class="form-control" type="text" name="hostname" value="<?php echo !empty($_POST['hostname']) ? htmlspecialchars($_POST['hostname']) : 'localhost'; ?>">
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-lg-10 control-label">Database Name:</label>
                 <div class="col-lg-14">
-                    <input class="form-control" type="text" name="db_name" value="<?php echo htmlspecialchars($_POST['db_name']); ?>">
+                    <input class="form-control" type="text" name="db_name" value="<?php echo !empty($_POST['db_name']) ? htmlspecialchars($_POST['db_name']) : ""; ?>">
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-lg-10 control-label">Database Username:</label>
                 <div class="col-lg-14">
-                    <input class="form-control" type="text" name="db_user" value="<?php echo htmlspecialchars($_POST['db_user']); ?>">
+                    <input class="form-control" type="text" name="db_user" value="<?php echo !empty($_POST['db_user']) ? htmlspecialchars($_POST['db_user']) : ""; ?>">
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-lg-10 control-label">Database Password:</label>
                 <div class="col-lg-14">
-                    <input class="form-control" type="text" name="db_pass" value="<?php echo htmlspecialchars($_POST['db_pass']); ?>">
+                    <input class="form-control" type="text" name="db_pass" value="<?php echo !empty($_POST['db_pass']) ? htmlspecialchars($_POST['db_pass']) : ""; ?>">
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-lg-10 control-label">Table Prefix:</label>
                 <div class="col-lg-14">
-                    <input class="form-control" type="text" name="prefix" value="<?php echo htmlspecialchars(($_POST['prefix'] == '') ? 'pmd_' : $_POST['prefix']); ?>">
+                    <input class="form-control" type="text" name="prefix" value="<?php echo !empty($_POST['prefix']) ?  htmlspecialchars($_POST['prefix']) : htmlspecialchars('pmd_'); ?>">
                 </div>
             </div>
             <div class="form-group">
@@ -107,7 +111,7 @@
             <div class="form-group">
                 <label class="col-lg-10 control-label">Database Port:</label>
                 <div class="col-lg-14">
-                    <input class="form-control" type="text" name="db_port" value="<?php echo htmlspecialchars(($_POST['db_port'] == '') ? '3306' : $_POST['db_port']); ?>">
+                    <input class="form-control" type="text" name="db_port" value="<?php echo !empty($_POST['db_port']) ? htmlspecialchars($_POST['db_port']) : '3306'; ?>">
                 </div>
             </div>
         </fieldset>
@@ -115,6 +119,7 @@
         </div>
         <div class="row row-complete text-center">
             <div class="col-xs-24">
+                <p><input type="checkbox" class="btn" value="1" id="terms_agree" name="terms_agree"></p><p>I must agree to the phpMyDirectory terms before installing.
                 <p><input type="submit" class="btn btn-lg btn-success" value="Complete Installation" id="complete" name="complete"></p>
             </div>
         </div>

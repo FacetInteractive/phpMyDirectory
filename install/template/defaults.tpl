@@ -35,6 +35,10 @@ define('DB_PORT', '{db_port}');
 define('DB_TABLE_PREFIX', '{db_table_prefix}');
 define('DB_CHARSET', '{db_charset}');
 define('DB_COLLATE', '{db_collate}');
+define('ADDON_BLOG', '');
+define('ADDON_LINK_CHECKER', '');
+define('ADDON_DISCOUNT_CODES', '');
+define('ADDON_UNBRANDING', '');
 
 /*******************************************************************
 * Encryption/Security Key

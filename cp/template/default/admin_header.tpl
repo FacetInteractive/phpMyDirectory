@@ -130,7 +130,7 @@
                                     <li><a href="./admin_banners_types.php?action=add"><?php echo $lang['admin_general_menu_banners_types_add']; ?></a></li>
                                 </ul>
                             </li>
-                            <?php if(ADDON_BLOG) { ?>
+                            <?php if(ADDON_BLOG !== null) { ?>
                             <li class="dropdown-submenu"><a href="./admin_blog.php"><?php echo $lang['admin_general_menu_blog']; ?></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="./admin_blog.php"><?php echo $lang['admin_general_menu_blog_posts']; ?></a></li>

@@ -86,7 +86,7 @@ if(isset($_POST['complete'])) {
         $variables['character_set'] = "CHARACTER SET `".$_POST['charset']."`";
     }
 
-    if(is_array($errors) AND sizeof($errors) < 1) {
+    if(!isset($errors)) {
         if(isset($_POST['prefix_overwrite'])) {
             foreach((array) $existing_tables as $table) {
                 $db->Execute("DROP TABLE ".$db->CleanIdentifier($table));
@@ -173,7 +173,7 @@ if(isset($_POST['complete'])) {
     }
 }
 
-if(!isset($_POST['complete']) OR sizeof($errors) > 0) {
+if(!isset($_POST['complete']) && !isset($errors)) {
     $javascript = '<script type="text/javascript" src="'.BASE_URL.'/includes/jquery/jquery.js"></script>';
     $javascript .= '<script type="text/javascript" src="'.BASE_URL.'/includes/jquery/jquery_custom.js"></script>';
     $javascript .= '<script type="text/javascript" src="'.BASE_URL.'/includes/jquery/qTip/jquery_qtip.js"></script>';

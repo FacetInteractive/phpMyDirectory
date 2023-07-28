@@ -1,7 +1,7 @@
 UPDATE {db_table_prefix}settings SET value='{admin_email}' WHERE varname='admin_email' OR varname='email_from_address';
 
-INSERT INTO {db_table_prefix}users (id, login, pass, password_salt, password_hash, cookie_salt, user_email, logged_last, logged_ip, logged_host, created, timezone, password_verify, user_first_name, user_last_name, user_organization, user_address1, user_address2, user_city, user_state, user_country, user_zip, user_phone, user_fax, user_comment, import_id) VALUES
-(1, '{admin_email}', '{admin_pass}', '{admin_password_salt}', 'sha256', '', '{admin_email}', NULL, '', '', NOW(), '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0);
+INSERT INTO {db_table_prefix}users (id, login, pass, password_salt, password_hash, cookie_salt, user_email, display_name, logged_last, logged_ip, logged_host, created, timezone, password_verify, user_first_name, user_last_name, user_organization, user_address1, user_address2, user_city, user_state, user_country, user_zip, user_phone, user_fax, user_comment, import_id) VALUES
+(1, '{admin_email}', '{admin_pass}', '{admin_password_salt}', 'sha256', '', '{admin_email}', '{admin_email}', NULL, '', '', NOW(), '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0);
 
 INSERT INTO {db_table_prefix}users_groups_lookup (user_id, group_id) VALUES (1,1);
 

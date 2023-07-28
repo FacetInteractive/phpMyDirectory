@@ -12,7 +12,7 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <?php echo $javascript; ?>
+    <?php echo isset($javascript) ? $javascript : ""; ?>
     <script type="text/javascript" src="<?php echo BASE_URL; ?>/install/template/bootstrap/bootstrap.js"></script>
 </head>
 <body>
@@ -25,6 +25,6 @@
     <div class="row">
         <div class="col-xs-20 col-xs-offset-2">
         <div id="messages">
-            <?php echo $message; ?>
+            <?php echo isset($message) ? $message : ""; ?>
         </div>
 
